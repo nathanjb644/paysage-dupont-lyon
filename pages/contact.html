@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devis Gratuit — Paysage Dupont Lyon</title>
+  <meta name="description" content="Demandez votre devis gratuit pour votre projet paysager à Lyon. Rappel garanti sous 2h. Aucun engagement.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://paysage-dupont-lyon.fr/pages/contact.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Contact page specific */
+    .contact-page { background: var(--clr-surface); }
+    .contact-page__inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--space-4xl) var(--space-xl);
+    }
+    .contact-page__title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: var(--font-weight-extrabold);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: var(--space-md);
+    }
+    .contact-page__subtitle {
+      font-size: 1.0625rem;
+      color: var(--clr-text-secondary);
+      margin-bottom: var(--space-2xl);
+      max-width: 50ch;
+    }
+    .form { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .field { display: flex; flex-direction: column; gap: var(--space-xs); }
+    .field__label {
+      font-size: 0.9375rem;
+      font-weight: var(--font-weight-medium);
+      color: var(--clr-text);
+    }
+    .field__input,
+    .field__select {
+      padding: 0.8125rem 1rem;
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+      -webkit-appearance: none;
+    }
+    .field__input:focus,
+    .field__select:focus {
+      outline: none;
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3px var(--clr-accent-light);
+    }
+    .field__input::placeholder { color: var(--clr-text-muted); }
+    .field__error {
+      font-size: 0.8125rem;
+      color: #c53030;
+      min-height: 1.2em;
+    }
+    .field--error .field__input,
+    .field--error .field__select { border-color: #c53030; }
+    .field--valid .field__input,
+    .field--valid .field__select { border-color: var(--clr-accent); }
+
+    /* Honeypot — invisible */
+    .field--hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
+    .form__consent {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+    .form__consent input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--clr-accent);
+      flex-shrink: 0;
+    }
+    .form__consent label {
+      font-size: 0.8125rem;
+      color: var(--clr-text-secondary);
+      line-height: 1.5;
+    }
+    .form__consent a { color: var(--clr-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    .form__submit { margin-top: var(--space-md); }
+    .form__submit .btn { width: 100%; padding: 1rem; font-size: 1.0625rem; }
+
+    .form__reassurance {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--clr-text-muted);
+      margin-top: var(--space-sm);
+    }
+
+    .contact-info {
+      margin-top: var(--space-3xl);
+      padding-top: var(--space-2xl);
+      border-top: 1px solid var(--clr-border-light);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    .contact-info__item h3 {
+      font-size: 0.8125rem;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--clr-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+    .contact-info__item p, .contact-info__item a {
+      font-size: 1rem;
+      color: var(--clr-text);
+      line-height: 1.6;
+    }
+    .contact-info__item a:hover { color: var(--clr-accent); }
+
+    @media (max-width: 640px) {
+      .contact-info { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Passer au contenu</a>
+
+  <!-- Header simplifié (pas de nav — landing page CRO) -->
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <a href="../index.html" class="header__logo" aria-label="Retour à l'accueil">
+        <span class="header__logo-mark">PD</span>
+        <span class="header__logo-text">Paysage Dupont</span>
+      </a>
+      <a href="tel:+33478123456" class="header__phone">
+        <svg class="header__phone-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        04 78 12 34 56
+      </a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-bar__inner">
+        <span class="trust-bar__item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          4.8/5 sur 47 avis Google
+        </span>
+        <span class="trust-bar__sep" aria-hidden="true"></span>
+        <span class="trust-bar__item">Rappel sous 2h</span>
+        <span class="trust-bar__sep" aria-hidden="true"></span>
+        <span class="trust-bar__item">Aucun engagement</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="contact-page">
+      <div class="contact-page__inner">
+        <h1 class="contact-page__title">Décrivez votre projet en 30 secondes</h1>
+        <p class="contact-page__subtitle">Remplissez ce formulaire et nous vous rappelons sous 2h ouvrées pour en discuter. Aucun engagement.</p>
+
+        <!-- FORMULAIRE — 3 champs + consent (Golden Pattern) -->
+        <form id="devis-form" class="form" name="devis" method="POST" data-netlify="true" netlify-honeypot="website">
+
+          <!-- Honeypot anti-spam (invisible) -->
+          <div class="field field--hp">
+            <label for="website">Ne pas remplir</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="prenom">Votre prénom</label>
+            <input class="field__input" type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Ex: Marie" maxlength="50">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="telephone">Votre téléphone</label>
+            <input class="field__input" type="tel" id="telephone" name="telephone" required autocomplete="tel" placeholder="06 12 34 56 78" inputmode="tel" pattern="[\d\s+()-]{10,}" maxlength="20">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="service">Type de projet</label>
+            <select class="field__select" id="service" name="service" required>
+              <option value="" disabled selected>Choisissez un type de projet</option>
+              <option value="creation">Création de jardin</option>
+              <option value="terrasse">Aménagement terrasse</option>
+              <option value="entretien">Entretien régulier</option>
+              <option value="allees">Allées et clôtures</option>
+              <option value="autre">Autre projet</option>
+            </select>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <!-- Case RGPD obligatoire -->
+          <div class="form__consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">J'accepte que mes données soient traitées pour me recontacter dans le cadre de ma demande de devis, conformément à la <a href="politique-confidentialite.html" target="_blank">politique de confidentialité</a>.</label>
+          </div>
+
+          <div class="form__submit">
+            <button type="submit" class="btn btn--primary btn--lg">Obtenir mon devis gratuit</button>
+          </div>
+
+          <p class="form__reassurance">Aucun engagement. Rappel sous 2h ouvrées.</p>
+        </form>
+
+        <div class="contact-info">
+          <div class="contact-info__item">
+            <h3>Téléphone</h3>
+            <p><a href="tel:+33478123456">04 78 12 34 56</a></p>
+            <p style="font-size: 0.8125rem; color: var(--clr-text-muted);">Lun-Ven, 8h-18h</p>
+          </div>
+          <div class="contact-info__item">
+            <h3>Adresse</h3>
+            <p>15 rue des Jardins<br>69003 Lyon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__bottom" style="padding: var(--space-lg) var(--space-xl);">
+      <p>Paysage Dupont — SIRET 123 456 789 00012 | <a href="mentions-legales.html" style="color: rgba(255,255,255,0.6);">Mentions légales</a> | <a href="politique-confidentialite.html" style="color: rgba(255,255,255,0.6);">Confidentialité</a></p>
+    </div>
+  </footer>
+
+  <a href="tel:+33478123456" class="mobile-sticky-call" aria-label="Appeler maintenant">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Appeler
+  </a>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
