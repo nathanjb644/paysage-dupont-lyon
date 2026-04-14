@@ -125,7 +125,14 @@
   var footerCookieBtn = document.getElementById('footer-cookie-btn');
 
   function getCookieConsent() {
-    try { return JSON.parse(localStorage.getItem('cookie_consent')); } catch (e) { return null; }
+    try {
+      var raw = localStorage.getItem('cookie_consent');
+      if (!raw) return null;
+      // Backward compat: old V1 stored plain strings like "accepted"/"refused"
+      if (raw === 'accepted') return { essential: true, analytics: true, marketing: false };
+      if (raw === 'refused') return { essential: true, analytics: false, marketing: false };
+      return JSON.parse(raw);
+    } catch (e) { return null; }
   }
 
   function setCookieConsent(value) {
@@ -135,10 +142,10 @@
     } catch (e) { /* Silently fail */ }
   }
 
-  function hideBanner() { if (cookieBanner) cookieBanner.hidden = true; }
-  function showBanner() { if (cookieBanner) cookieBanner.hidden = false; }
-  function hideModal() { if (cookieModal) cookieModal.hidden = true; }
-  function showModal() { if (cookieModal) cookieModal.hidden = false; }
+  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } }
+  function showBanner() { if (cookieBanner) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
+  function hideModal() { if (cookieModal) { cookieModal.hidden = true; cookieModal.style.display = 'none'; } }
+  function showModal() { if (cookieModal) { cookieModal.hidden = false; cookieModal.style.display = ''; } }
 
   function isConsentValid() {
     try {
