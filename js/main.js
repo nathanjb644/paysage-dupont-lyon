@@ -5,24 +5,50 @@
  * Features:
  * - Burger menu mobile
  * - Slider avant/après interactif
- * - Cookie banner CNIL conforme
- * - Formulaire validation inline
+ * - Cookie banner CNIL conforme + modal paramétrage
+ * - Formulaire validation inline avec feedback visuel
  * - Smooth scroll
  * - Honeypot anti-spam
+ * - Scroll reveal animations (IntersectionObserver)
+ * - Gallery filtering
  */
 
 (function () {
   'use strict';
 
   // ============================================
+  // SCROLL REVEAL — IntersectionObserver
+  // ============================================
+  var revealElements = document.querySelectorAll('.reveal');
+  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal--visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealElements.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    // Fallback: show everything if no IntersectionObserver
+    revealElements.forEach(function (el) {
+      el.classList.add('reveal--visible');
+    });
+  }
+
+  // ============================================
   // BURGER MENU
   // ============================================
-  const burgerBtn = document.getElementById('burger-btn');
-  const mobileNav = document.getElementById('mobile-nav');
+  var burgerBtn = document.getElementById('burger-btn');
+  var mobileNav = document.getElementById('mobile-nav');
 
   if (burgerBtn && mobileNav) {
     burgerBtn.addEventListener('click', function () {
-      const isOpen = this.getAttribute('aria-expanded') === 'true';
+      var isOpen = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', !isOpen);
       mobileNav.hidden = isOpen;
       document.body.style.overflow = isOpen ? '' : 'hidden';
@@ -88,101 +114,117 @@
   });
 
   // ============================================
-  // COOKIE BANNER — CNIL 2026 CONFORME
-  // Aucun cookie non-essentiel avant consentement
+  // COOKIE BANNER + MODAL — CNIL 2026 CONFORME
+  // 3 catégories : Essentiel (toujours), Analytique (consent), Marketing (consent)
   // ============================================
   var cookieBanner = document.getElementById('cookie-banner');
   var cookieAccept = document.getElementById('cookie-accept');
   var cookieRefuse = document.getElementById('cookie-refuse');
   var cookieParams = document.getElementById('cookie-params');
+  var cookieModal = document.getElementById('cookie-modal');
   var footerCookieBtn = document.getElementById('footer-cookie-btn');
 
   function getCookieConsent() {
-    try {
-      return localStorage.getItem('cookie_consent');
-    } catch (e) {
-      return null;
-    }
+    try { return JSON.parse(localStorage.getItem('cookie_consent')); } catch (e) { return null; }
   }
 
   function setCookieConsent(value) {
     try {
-      localStorage.setItem('cookie_consent', value);
+      localStorage.setItem('cookie_consent', JSON.stringify(value));
       localStorage.setItem('cookie_consent_date', new Date().toISOString());
-    } catch (e) {
-      // Silently fail
-    }
+    } catch (e) { /* Silently fail */ }
   }
 
-  function hideBanner() {
-    if (cookieBanner) cookieBanner.hidden = true;
-  }
+  function hideBanner() { if (cookieBanner) cookieBanner.hidden = true; }
+  function showBanner() { if (cookieBanner) cookieBanner.hidden = false; }
+  function hideModal() { if (cookieModal) cookieModal.hidden = true; }
+  function showModal() { if (cookieModal) cookieModal.hidden = false; }
 
-  function showBanner() {
-    if (cookieBanner) cookieBanner.hidden = false;
-  }
-
-  // Vérifier consentement existant (max 13 mois — CNIL)
   function isConsentValid() {
     try {
       var date = localStorage.getItem('cookie_consent_date');
       if (!date) return false;
       var diff = Date.now() - new Date(date).getTime();
-      var thirteenMonths = 13 * 30 * 24 * 60 * 60 * 1000;
-      return diff < thirteenMonths;
-    } catch (e) {
-      return false;
-    }
+      return diff < 13 * 30 * 24 * 60 * 60 * 1000; // 13 mois CNIL
+    } catch (e) { return false; }
   }
 
   // Init
-  if (getCookieConsent() && isConsentValid()) {
+  var consent = getCookieConsent();
+  if (consent && isConsentValid()) {
     hideBanner();
-    if (getCookieConsent() === 'accepted') {
-      // Charger analytics si accepté (placeholder)
-      // loadAnalytics();
-    }
+    if (consent.analytics) { /* loadAnalytics(); */ }
   } else {
     showBanner();
   }
 
   if (cookieAccept) {
     cookieAccept.addEventListener('click', function () {
-      setCookieConsent('accepted');
+      setCookieConsent({ essential: true, analytics: true, marketing: false });
       hideBanner();
-      // loadAnalytics();
+      hideModal();
     });
   }
 
   if (cookieRefuse) {
     cookieRefuse.addEventListener('click', function () {
-      setCookieConsent('refused');
+      setCookieConsent({ essential: true, analytics: false, marketing: false });
       hideBanner();
+      hideModal();
     });
   }
 
+  // Ouvrir le modal de paramétrage
   if (cookieParams) {
     cookieParams.addEventListener('click', function () {
-      // Pour un site statique simple : même comportement que refuser
-      // Un site plus complexe ouvrirait un modal de paramétrage
-      setCookieConsent('refused');
       hideBanner();
+      showModal();
     });
+  }
+
+  // Toggles dans le modal
+  if (cookieModal) {
+    var toggles = cookieModal.querySelectorAll('.cookie-toggle:not(.cookie-toggle--disabled)');
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        this.classList.toggle('cookie-toggle--active');
+      });
+    });
+
+    // Bouton sauvegarder dans le modal
+    var saveBtn = cookieModal.querySelector('#cookie-save');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        var analyticsToggle = cookieModal.querySelector('[data-category="analytics"]');
+        setCookieConsent({
+          essential: true,
+          analytics: analyticsToggle ? analyticsToggle.classList.contains('cookie-toggle--active') : false,
+          marketing: false
+        });
+        hideModal();
+      });
+    }
+
+    // Fermer le modal
+    var closeBtn = cookieModal.querySelector('#cookie-modal-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        hideModal();
+        showBanner();
+      });
+    }
   }
 
   // Réouverture depuis le footer
   if (footerCookieBtn) {
     footerCookieBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      try { localStorage.removeItem('cookie_consent'); } catch (e) {}
-      showBanner();
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      showModal();
     });
   }
 
   // ============================================
-  // FORMULAIRE — Validation inline + Honeypot
-  // (Utilisé sur pages/contact.html)
+  // FORMULAIRE — Validation inline + Honeypot + Feedback visuel
   // ============================================
   var form = document.getElementById('devis-form');
   if (form) {
@@ -217,7 +259,8 @@
 
       if (!isValid) {
         e.preventDefault();
-        form.querySelector('.field--error input, .field--error select').focus();
+        var firstError = form.querySelector('.field--error input, .field--error select');
+        if (firstError) firstError.focus();
       }
     });
   }
@@ -250,6 +293,33 @@
   }
 
   // ============================================
+  // GALLERY FILTERING
+  // ============================================
+  var filterBtns = document.querySelectorAll('.gallery-filter');
+  var galleryItems = document.querySelectorAll('.gallery-item');
+
+  if (filterBtns.length > 0) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = this.getAttribute('data-filter');
+
+        // Active state
+        filterBtns.forEach(function (b) { b.classList.remove('gallery-filter--active'); });
+        this.classList.add('gallery-filter--active');
+
+        // Filter items
+        galleryItems.forEach(function (item) {
+          if (filter === 'all' || item.getAttribute('data-type') === filter) {
+            item.classList.remove('gallery-item--hidden');
+          } else {
+            item.classList.add('gallery-item--hidden');
+          }
+        });
+      });
+    });
+  }
+
+  // ============================================
   // SMOOTH SCROLL pour les ancres
   // ============================================
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -257,7 +327,7 @@
       var target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        var headerHeight = document.querySelector('.header').offsetHeight || 0;
+        var headerHeight = document.querySelector('.header') ? document.querySelector('.header').offsetHeight : 0;
         var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
         window.scrollTo({ top: top, behavior: 'smooth' });
       }
