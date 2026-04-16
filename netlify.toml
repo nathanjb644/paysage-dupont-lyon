@@ -5,3 +5,25 @@
   from = "/*"
   to = "/404.html"
   status = 404
+
+# ============================================
+# WEBHOOK — Email automation post-formulaire
+# ============================================
+# Quand un prospect soumet le formulaire "devis",
+# Netlify envoie les données en JSON à ce webhook.
+# Branchez-le sur Make.com (ex-Integromat) ou Zapier
+# pour déclencher l'email automatique avec le Lookbook PDF.
+#
+# Configuration :
+# 1. Créez un scénario Make.com avec un trigger "Webhook"
+# 2. Copiez l'URL du webhook Make.com
+# 3. Collez-la ci-dessous en remplacement de VOTRE_WEBHOOK_URL
+# 4. Le scénario Make.com envoie l'email via Gmail/SMTP
+#
+# [notifications.devis]
+#   url = "VOTRE_WEBHOOK_URL"
+#   format = "json"
+#   event = "submission_created"
+#   form = "devis"
+#
+# Décommentez les 5 lignes ci-dessus quand le webhook est prêt.

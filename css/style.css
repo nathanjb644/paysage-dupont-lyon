@@ -1015,6 +1015,30 @@ a:focus-visible {
 }
 .avis__google-link:hover { gap: 10px; text-decoration: underline; text-underline-offset: 3px; }
 
+/* Google Reviews Embed — Omnibus compliant */
+.avis__google-embed {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--clr-border-light);
+}
+.avis__google-embed-label {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-lg);
+  color: var(--clr-text);
+}
+.avis__google-embed-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.avis__google-embed-note {
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+  margin-top: var(--space-md);
+  font-style: italic;
+}
+
 /* --- Service Page Styles --- */
 .service-hero {
   background: var(--clr-surface);
