@@ -137,9 +137,44 @@
 
   function setCookieConsent(value) {
     try {
+      var now = new Date().toISOString();
       localStorage.setItem('cookie_consent', JSON.stringify(value));
-      localStorage.setItem('cookie_consent_date', new Date().toISOString());
+      localStorage.setItem('cookie_consent_date', now);
+
+      // CNIL consent journal — log to Netlify hidden form
+      logConsentToServer(value, now);
     } catch (e) { /* Silently fail */ }
+  }
+
+  // Send consent record to Netlify form for CNIL audit trail
+  function logConsentToServer(consent, timestamp) {
+    try {
+      var body = new URLSearchParams();
+      body.append('form-name', 'consent-journal');
+      body.append('timestamp', timestamp);
+      body.append('consent_essential', 'true');
+      body.append('consent_analytics', consent.analytics ? 'true' : 'false');
+      body.append('consent_marketing', consent.marketing ? 'true' : 'false');
+      body.append('policy_version', '2026-04');
+      body.append('consent_id', generateConsentId());
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      }).catch(function() { /* Silent — non-blocking */ });
+    } catch (e) { /* Silent */ }
+  }
+
+  // Generate a pseudonymous consent ID (no PII)
+  function generateConsentId() {
+    try {
+      var arr = new Uint8Array(8);
+      crypto.getRandomValues(arr);
+      return Array.from(arr, function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+    } catch (e) {
+      return 'fallback-' + Date.now().toString(36);
+    }
   }
 
   function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } }

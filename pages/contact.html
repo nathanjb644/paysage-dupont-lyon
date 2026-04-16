@@ -20,10 +20,11 @@
       padding: var(--space-4xl) var(--space-xl);
     }
     .contact-page__title {
+      font-family: var(--font-display);
       font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: var(--font-weight-extrabold);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
+      font-weight: var(--font-weight-normal);
+      letter-spacing: -0.015em;
+      line-height: 1.12;
       margin-bottom: var(--space-md);
     }
     .contact-page__subtitle {
@@ -41,21 +42,21 @@
     }
     .field__input,
     .field__select {
-      padding: 0.8125rem 1rem;
+      padding: 0.9375rem 1.125rem;
       border: 1.5px solid var(--clr-border);
       border-radius: var(--radius-md);
       font-size: 1rem;
       font-family: inherit;
       background: var(--clr-bg);
       color: var(--clr-text);
-      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+      transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
       -webkit-appearance: none;
     }
     .field__input:focus,
     .field__select:focus {
       outline: none;
       border-color: var(--clr-accent);
-      box-shadow: 0 0 0 3px var(--clr-accent-light);
+      box-shadow: 0 0 0 4px var(--clr-accent-light);
     }
     .field__input::placeholder { color: var(--clr-text-muted); }
     .field__error {
@@ -164,8 +165,8 @@
         <h1 class="contact-page__title">Décrivez votre projet en 30 secondes</h1>
         <p class="contact-page__subtitle">Remplissez ce formulaire et nous vous rappelons sous 2h ouvrées pour en discuter. Aucun engagement.</p>
 
-        <!-- FORMULAIRE — 3 champs + consent (Golden Pattern) -->
-        <form id="devis-form" class="form" name="devis" method="POST" data-netlify="true" netlify-honeypot="website">
+        <!-- FORMULAIRE — 5 champs qualifiés + consent (Golden Pattern CRO) -->
+        <form id="devis-form" class="form" name="devis" method="POST" data-netlify="true" netlify-honeypot="website" action="merci.html">
 
           <!-- Honeypot anti-spam (invisible) -->
           <div class="field field--hp">
@@ -196,6 +197,31 @@
               <option value="autre">Autre projet</option>
             </select>
             <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="surface">Surface approximative</label>
+            <select class="field__select" id="surface" name="surface" required>
+              <option value="" disabled selected>Quelle surface à aménager ?</option>
+              <option value="moins-50">Moins de 50 m²</option>
+              <option value="50-100">50 à 100 m²</option>
+              <option value="100-200">100 à 200 m²</option>
+              <option value="200-500">200 à 500 m²</option>
+              <option value="plus-500">Plus de 500 m²</option>
+            </select>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="budget">Budget en tête <span style="font-weight: 400; color: var(--clr-text-muted);">(optionnel)</span></label>
+            <select class="field__select" id="budget" name="budget">
+              <option value="" selected>Je ne sais pas encore</option>
+              <option value="moins-3000">Moins de 3 000 EUR</option>
+              <option value="3000-5000">3 000 — 5 000 EUR</option>
+              <option value="5000-10000">5 000 — 10 000 EUR</option>
+              <option value="10000-20000">10 000 — 20 000 EUR</option>
+              <option value="plus-20000">Plus de 20 000 EUR</option>
+            </select>
           </div>
 
           <!-- Case RGPD obligatoire -->
