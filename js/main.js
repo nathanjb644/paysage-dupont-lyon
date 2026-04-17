@@ -376,4 +376,42 @@
     });
   });
 
+  // ============================================
+  // SCROLL SPY — active nav link indicator
+  // ============================================
+  var navLinks = document.querySelectorAll('.header__nav-list a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function (link) {
+    var target = document.querySelector(link.getAttribute('href'));
+    if (target) sections.push({ el: target, link: link });
+  });
+
+  if (sections.length > 0) {
+    var scrollSpyUpdate = function () {
+      var scrollPos = window.pageYOffset;
+      var headerH = document.querySelector('.header') ? document.querySelector('.header').offsetHeight : 0;
+      var current = null;
+
+      sections.forEach(function (s) {
+        if (s.el.offsetTop - headerH - 100 <= scrollPos) {
+          current = s;
+        }
+      });
+
+      navLinks.forEach(function (link) { link.classList.remove('is-active'); });
+      if (current) current.link.classList.add('is-active');
+    };
+
+    var scrollSpyThrottle = null;
+    window.addEventListener('scroll', function () {
+      if (!scrollSpyThrottle) {
+        scrollSpyThrottle = requestAnimationFrame(function () {
+          scrollSpyUpdate();
+          scrollSpyThrottle = null;
+        });
+      }
+    }, { passive: true });
+    scrollSpyUpdate();
+  }
+
 })();
