@@ -362,6 +362,21 @@
   }
 
   // ============================================
+  // LOGO CLICK — scroll to top instead of page reload
+  // Prevents cookie banner flash on homepage
+  // ============================================
+  var logoLink = document.querySelector('.header__logo');
+  if (logoLink && (logoLink.getAttribute('href') === '/' || logoLink.getAttribute('href') === '/index.html')) {
+    logoLink.addEventListener('click', function (e) {
+      // Only intercept if we're already on the homepage
+      if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/template-paysagiste/')) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+  // ============================================
   // SMOOTH SCROLL pour les ancres
   // ============================================
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
