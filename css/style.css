@@ -8,14 +8,14 @@
 
 /* --- Design Tokens --- */
 :root {
-  /* Palette HIGH-TICKET — tons terreux, neutres profonds */
-  --clr-bg: #F7F3ED;             /* Crème chaud — papier luxueux */
-  --clr-surface: #FFFDF9;        /* Blanc chaud — cartes et surfaces */
+  /* Palette HIGH-TICKET — ecart bg/surface accentue pour lisibilite mobile */
+  --clr-bg: #F3EEE5;             /* Creme kraft — papier artisanal, visible sur tous ecrans */
+  --clr-surface: #FDFCFA;        /* Blanc chaud clair — cartes et surfaces elevees */
   --clr-text: #2C2A26;           /* Charbon riche — jamais noir pur */
   --clr-text-secondary: #6B6560; /* Gris terreux chaud */
   --clr-text-muted: #9E968E;     /* Pierre claire */
-  --clr-border: #E8E2D8;         /* Sable doux */
-  --clr-border-light: #F0EBE3;   /* Sable très clair */
+  --clr-border: #E5DFD4;         /* Sable doux — ajuste au nouveau bg */
+  --clr-border-light: #EDE8DF;   /* Sable clair — ajuste */
 
   /* Accent unique — forêt profond (autorité, nature, prestige) */
   --clr-accent: #1B3A2D;
@@ -34,7 +34,7 @@
   --clr-earth-100: #EDE6DC;
   --clr-stone-100: #E8E4DE;
   --clr-star: #C4922A;           /* Or profond, pas jaune vif */
-  --clr-white: #FFFDF9;
+  --clr-white: #FDFCFA;
 
   /* Typographie — Serif d'autorité + Sans-Serif lisible */
   --font-display: 'DM Serif Display', 'Georgia', serif;
@@ -1651,21 +1651,42 @@ a:focus-visible {
 @media (max-width: 768px) {
   :root {
     --space-xl: 1.25rem;
-    --space-4xl: 4rem;
-    --space-5xl: 5rem;
+    --space-3xl: 3rem;
+    --space-4xl: 3.5rem;
+    --space-5xl: 4rem;
+  }
+
+  /* Section padding tighter on mobile — no floating sections */
+  .section__inner {
+    padding: var(--space-3xl) var(--space-xl) var(--space-4xl);
   }
 
   .header__nav { display: none; }
   .header__phone { display: none; }
   .header__burger { display: block; }
 
-  .trust-bar__inner { gap: var(--space-md); font-size: 0.6875rem; flex-wrap: wrap; justify-content: center; }
+  /* Trust bar: tighter but still readable on small screens */
+  .trust-bar__inner {
+    gap: 6px var(--space-md);
+    font-size: 0.6875rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5rem var(--space-md);
+  }
+  .trust-bar__item svg { width: 12px; height: 12px; }
 
   .hero__inner {
     grid-template-columns: 1fr;
-    padding: var(--space-2xl) var(--space-xl);
+    padding: var(--space-xl) var(--space-xl) var(--space-2xl);
   }
   .hero__title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+  .hero__subtitle { margin-bottom: var(--space-lg); }
+
+  /* Outline button stronger border on mobile */
+  .btn--outline {
+    border-color: var(--clr-border);
+    border-width: 1.5px;
+  }
 
   .services__grid { grid-template-columns: 1fr; }
   .service-card:first-child { grid-column: auto; display: block; }
@@ -1676,9 +1697,17 @@ a:focus-visible {
   .avis-card:first-child { grid-row: auto; padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-2xl); }
 
   .fondateur__inner { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: var(--space-lg); }
-  .fondateur__portrait { width: 110px; height: 110px; }
-  .fondateur__quote { text-align: left; }
-  .fondateur__credentials { justify-content: center; }
+  .fondateur__portrait { width: 100px; height: 100px; }
+  .fondateur__quote { text-align: left; padding-left: var(--space-md); }
+  .fondateur__credentials { justify-content: center; gap: var(--space-md); }
+  .fondateur__name { font-size: 1.25rem; }
+
+  /* Cards need more elevation on mobile — bg/surface too close */
+  .service-card,
+  .avis-card,
+  .projet-card {
+    box-shadow: var(--shadow-sm);
+  }
 
   .footer__inner { grid-template-columns: 1fr; gap: var(--space-xl); }
   .footer__cta { justify-content: flex-start; }
@@ -1692,11 +1721,43 @@ a:focus-visible {
   .cookie-inner { flex-direction: column; text-align: center; }
   .cookie-actions { width: 100%; }
   .cookie-btn { flex: 1; }
+
+  /* Leaf dividers smaller on mobile */
+  .services::after,
+  .realisations::after {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* CTA final — less padding on mobile */
+  .cta-final__inner {
+    padding: var(--space-4xl) var(--space-xl);
+  }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --space-3xl: 2.5rem;
+    --space-4xl: 3rem;
+    --space-5xl: 3.5rem;
+  }
+
   .hero__actions { flex-direction: column; }
   .hero__actions .btn { width: 100%; }
-  .trust-bar__sep:nth-child(4),
+
+  /* Trust bar: hide 4th item on tiny screens */
+  .trust-bar__sep:nth-child(6),
   .trust-bar__item:nth-child(4) { display: none; }
+
+  .hero__title { font-size: 1.625rem; }
+
+  /* Section titles tighter */
+  .section__title { font-size: 1.375rem; }
+
+  /* Process step numbers smaller */
+  .processus__number { font-size: 2rem; }
+
+  /* Fondateur even more compact */
+  .fondateur__portrait { width: 80px; height: 80px; }
+  .fondateur__credential { font-size: 0.75rem; }
 }
