@@ -1115,6 +1115,12 @@ a:focus-visible {
   padding-top: var(--space-2xl);
   border-top: 1px solid var(--clr-border-light);
 }
+.section__cta-reassurance {
+  margin-top: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--clr-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
 
 /* --- Qualification (Méthode Heinly — auto-qualification du prospect) --- */
 .qualification { background: var(--clr-bg); }
