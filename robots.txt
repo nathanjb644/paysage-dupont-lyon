@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /pages/merci.html
+
+Sitemap: https://paysage-dupont-lyon.fr/sitemap.xml

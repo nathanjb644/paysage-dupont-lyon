@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paysage Dupont Lyon — Aménagement de Jardin & Paysagiste</title>
-  <meta name="description" content="Paysagiste à Lyon et alentours. Création de jardins, terrasses et entretien. Devis gratuit sous 2h. Plus de 47 jardins transformés depuis 2019. Note 4.8/5 sur Google.">
+  <meta name="description" content="Paysagiste à Lyon. Création de jardins, terrasses et entretien. Devis gratuit sous 2h. 47 jardins réalisés depuis 2019. Note 4.8/5 Google.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://paysage-dupont-lyon.fr/">
 
@@ -24,6 +24,15 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- INSTRUCTION CMP : Remplacer le cookie banner custom par Tarteaucitron.js (CNIL conforme)
+       1. Ajouter <script src="https://cdn.jsdelivr.net/npm/tarteaucitron@latest/tarteaucitron.js"></script>
+       2. Initialiser : tarteaucitron.init({ privacyUrl: "/pages/politique-confidentialite.html", ... })
+       3. Conditionner le widget Google Maps : tarteaucitron.user.googlemapsKey = "YOUR_API_KEY"
+       4. Supprimer l'actuel #cookie-banner et #cookie-modal du HTML
+       5. Supprimer les fonctions cookie dans js/main.js (lignes 119-266)
+       Documentation : https://tarteaucitron.io/fr/install/
+  -->
 
   <!-- Schema.org LocalBusiness -->
   <script type="application/ld+json">
@@ -190,6 +199,51 @@
     "description": "Entretien régulier de jardins à Lyon et alentours : tonte, taille, désherbage, traitement phytosanitaire. Contrats mensuels ou saisonniers."
   }
   </script>
+
+  <!-- Schema.org Organization — Knowledge Panel Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Paysage Dupont Lyon",
+    "url": "https://paysage-dupont-lyon.fr",
+    "logo": "https://paysage-dupont-lyon.fr/img/logo-paysage-dupont.webp",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+33 4 78 12 34 56",
+      "contactType": "customer service",
+      "availableLanguage": "French",
+      "areaServed": "FR"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "15 rue des Jardins",
+      "addressLocality": "Lyon",
+      "postalCode": "69003",
+      "addressCountry": "FR"
+    },
+    "sameAs": [
+      "https://www.facebook.com/paysagedupont",
+      "https://www.instagram.com/paysagedupont"
+    ]
+  }
+  </script>
+
+  <!-- Schema.org BreadcrumbList — fil d'Ariane pour Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://paysage-dupont-lyon.fr/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -234,6 +288,8 @@
         <svg class="header__phone-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         04 78 12 34 56
       </a>
+
+      <a href="pages/contact.html?ref=nav_sticky" class="header__cta-sticky">Devis gratuit</a>
 
       <button class="header__burger" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -289,8 +345,9 @@
     <section class="hero">
       <div class="hero__inner">
         <div class="hero__content">
-          <h1 class="hero__title">Votre extérieur devient la plus belle pièce de votre maison</h1>
-          <p class="hero__subtitle">Paysagiste à Lyon — création, aménagement et entretien de jardins d'exception. Plus de 47 projets réalisés depuis 2019.</p>
+          <span class="hero__label">Paysagiste à Lyon depuis 2019</span>
+          <h1 class="hero__title">Création de jardins, terrasses et entretien d'extérieurs</h1>
+          <p class="hero__subtitle">Plus de 47 projets réalisés à Lyon et alentours. Devis gratuit, rappel sous 2h.</p>
           <div class="hero__actions">
             <a href="pages/contact.html?ref=hero_cta" class="btn btn--primary btn--lg">Obtenir mon devis gratuit</a>
             <a href="tel:+33478123456" class="btn btn--outline btn--lg hero__phone-btn">
@@ -298,7 +355,16 @@
               04 78 12 34 56
             </a>
           </div>
-          <p class="hero__reassurance">Devis gratuit, aucun engagement. Rappel sous 2h ouvrées.</p>
+          <div class="hero__proof">
+            <span class="hero__proof-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="hero__proof-star"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.8/5 Google
+            </span>
+            <span class="hero__proof-sep" aria-hidden="true"></span>
+            <span class="hero__proof-item">47 jardins réalisés</span>
+            <span class="hero__proof-sep" aria-hidden="true"></span>
+            <span class="hero__proof-item">Depuis 2019</span>
+          </div>
           <div class="availability">
             <span class="availability__dot" aria-hidden="true"></span>
             Prochaine visite disponible : cette semaine
@@ -320,13 +386,13 @@
     <!-- ============================================ -->
     <section class="services" id="services">
       <div class="section__inner">
-        <span class="section__label reveal">Services</span>
+        <span class="section__label reveal">Nos prestations</span>
         <h2 class="section__title reveal">Un savoir-faire complet pour votre extérieur</h2>
 
         <div class="services__grid">
           <article class="service-card reveal reveal--delay-1">
             <div class="service-card__img" role="img" aria-label="Création de jardin">
-              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=340&fit=crop&q=75') center/cover no-repeat;"></div>
+              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=340&fit=crop&q=75') center/cover no-repeat;" role="img" aria-label="Création de jardin paysager à Lyon"></div>
             </div>
             <h3 class="service-card__title">Création de jardin</h3>
             <p class="service-card__text">Conception sur mesure, de l'étude paysagère aux plantations. Terrains de 50 à 500m².</p>
@@ -337,7 +403,7 @@
 
           <article class="service-card reveal reveal--delay-2">
             <div class="service-card__img" role="img" aria-label="Aménagement terrasse">
-              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=340&fit=crop&q=75') center/cover no-repeat;"></div>
+              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=340&fit=crop&q=75') center/cover no-repeat;" role="img" aria-label="Aménagement de terrasse bois à Lyon"></div>
             </div>
             <h3 class="service-card__title">Aménagement terrasse</h3>
             <p class="service-card__text">Bois, pierre, composite. Pose, nivellement et finitions. Garantie décennale incluse.</p>
@@ -348,7 +414,7 @@
 
           <article class="service-card reveal reveal--delay-3">
             <div class="service-card__img" role="img" aria-label="Entretien de jardin">
-              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=600&h=340&fit=crop&q=75') center/cover no-repeat;"></div>
+              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=600&h=340&fit=crop&q=75') center/cover no-repeat;" role="img" aria-label="Entretien de jardin régulier à Lyon"></div>
             </div>
             <h3 class="service-card__title">Entretien régulier</h3>
             <p class="service-card__text">Tonte, taille, désherbage, traitements. Contrats à l'année ou interventions ponctuelles.</p>
@@ -359,7 +425,7 @@
 
           <article class="service-card reveal reveal--delay-4">
             <div class="service-card__img" role="img" aria-label="Allées et clôtures">
-              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1604762524889-3e2fcc145683?w=600&h=340&fit=crop&q=75') center/cover no-repeat;"></div>
+              <div class="service-card__img-inner" style="background: url('https://images.unsplash.com/photo-1604762524889-3e2fcc145683?w=600&h=340&fit=crop&q=75') center/cover no-repeat;" role="img" aria-label="Allées pavées et clôtures végétales à Lyon"></div>
             </div>
             <h3 class="service-card__title">Allées et clôtures</h3>
             <p class="service-card__text">Pavés, graviers, béton décoratif. Clôtures bois, aluminium, végétales. Devis sur mesure.</p>
@@ -367,6 +433,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </article>
+        </div>
+
+        <div class="section__cta-inline">
+          <a href="pages/contact.html?ref=services_cta" class="btn btn--primary">Demander un devis pour votre projet</a>
         </div>
       </div>
     </section>
@@ -519,7 +589,7 @@
       <div class="section__inner">
         <div class="fondateur__inner reveal">
           <div class="fondateur__portrait" role="img" aria-label="Antoine Dupont, fondateur de Paysage Dupont">
-            <div class="fondateur__img" style="background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80&crop=face') center/cover no-repeat;"></div>
+            <div class="fondateur__img" style="background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80&crop=face') center/cover no-repeat;" role="img" aria-label="Antoine Dupont, fondateur de Paysage Dupont Lyon"></div>
           </div>
           <div class="fondateur__content">
             <span class="section__label">Le fondateur</span>
@@ -553,7 +623,7 @@
     <!-- ============================================ -->
     <section class="avis" id="avis">
       <div class="section__inner">
-        <span class="section__label reveal">Ils nous font confiance</span>
+        <span class="section__label reveal">Avis clients</span>
         <h2 class="section__title reveal">Ce que nos clients disent de nous</h2>
         <p class="section__desc">4.8/5 sur 47 avis Google — <a href="https://g.page/paysage-dupont-lyon/review" target="_blank" rel="noopener noreferrer" style="color: var(--clr-accent); text-decoration: underline; text-underline-offset: 2px;">consultez les avis sur Google</a> <span style="color: var(--clr-text-muted); font-size: 0.8125rem;">(consultés le 15 avril 2026)</span></p>
 
@@ -612,7 +682,10 @@
         <div class="avis__google-embed">
           <p class="avis__google-embed-label">Nos avis vérifiés directement depuis Google</p>
           <div class="avis__google-embed-frame">
-            <!-- INSTRUCTION CLIENT : Remplacer PLACE_ID par l'identifiant Google My Business réel -->
+            <!-- INSTRUCTION CLIENT : 2 options pour afficher les vrais avis Google -->
+            <!-- Option A (gratuit) : Remplacer l'URL iframe ci-dessous par votre fiche Google Maps -->
+            <!-- Option B (recommandé) : Créer un widget Elfsight (elfsight.com/google-reviews-widget) -->
+            <!--   puis remplacer tout l'iframe par le <script> Elfsight fourni -->
             <!-- Pour obtenir le Place ID : https://developers.google.com/maps/documentation/places/web-service/place-id -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.5!2d4.832!3d45.7578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPaysage+Dupont+Lyon!5e0!3m2!1sfr!2sfr!4v1713264000000"
@@ -631,12 +704,67 @@
     </section>
 
     <!-- ============================================ -->
+    <!-- QUALIFICATION — Le prospect se reconnaît (Méthode Heinly) -->
+    <!-- Cycle CRO : Confiance (avis) → Qualification → Solution (CTA) -->
+    <!-- ============================================ -->
+    <section class="qualification">
+      <div class="section__inner">
+        <span class="section__label reveal">Vous reconnaissez-vous ?</span>
+        <h2 class="section__title reveal">Vous faites face à l'une de ces situations ?</h2>
+
+        <div class="qualification__grid">
+          <div class="qualification__item reveal reveal--delay-1">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Votre jardin est envahi par les mauvaises herbes et vous manquez de temps pour l'entretenir correctement.</p>
+          </div>
+          <div class="qualification__item reveal reveal--delay-2">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Vous venez de faire construire et votre extérieur est encore un terrain vague.</p>
+          </div>
+          <div class="qualification__item reveal reveal--delay-3">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Vous avez demandé plusieurs devis mais aucun paysagiste ne vous a rappelé dans les délais.</p>
+          </div>
+          <div class="qualification__item reveal reveal--delay-4">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Vous aimeriez profiter de votre terrasse mais elle est vieillissante et mal aménagée.</p>
+          </div>
+          <div class="qualification__item reveal reveal--delay-5">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Vous ne savez pas quelles plantes choisir pour le climat lyonnais et votre type de sol.</p>
+          </div>
+          <div class="qualification__item reveal reveal--delay-6">
+            <span class="qualification__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </span>
+            <p>Vous voulez augmenter la valeur de votre bien immobilier avec un extérieur soigné.</p>
+          </div>
+        </div>
+
+        <div class="qualification__cta">
+          <p class="qualification__cta-text">Si vous vous reconnaissez dans au moins une de ces situations, nous pouvons vous aider.</p>
+          <a href="pages/contact.html?ref=qualification" class="btn btn--primary btn--lg">Discutons de votre projet</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
     <!-- FAQ — SEO + conversion -->
     <!-- Golden Pattern: 5 questions minimum -->
     <!-- ============================================ -->
     <section class="faq" id="faq">
       <div class="section__inner section__inner--narrow">
-        <span class="section__label">Questions fréquentes</span>
+        <span class="section__label reveal">Questions fréquentes</span>
         <h2 class="section__title">Tout savoir avant de nous contacter</h2>
 
         <div class="faq__list">
