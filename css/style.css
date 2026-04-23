@@ -398,9 +398,8 @@ a:focus-visible {
   justify-content: center;
   gap: var(--space-xl);
   font-size: 0.8125rem;
-  color: rgba(247,243,237,0.85);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.01em;
+  color: rgba(247,243,237,0.7);
+  font-weight: var(--font-weight-normal);
 }
 .trust-bar__item {
   display: flex;
@@ -408,12 +407,17 @@ a:focus-visible {
   gap: 6px;
   white-space: nowrap;
 }
+/* Rating = signal le plus fort → bold + opacité pleine */
+.trust-bar__item--rating {
+  color: rgba(247,243,237,0.92);
+  font-weight: var(--font-weight-semibold);
+}
 .trust-bar__item svg {
   color: var(--clr-brass);
   flex-shrink: 0;
-  opacity: 0.9;
+  opacity: 0.85;
 }
-.trust-bar__item--rating svg { color: var(--clr-star); }
+.trust-bar__item--rating svg { color: var(--clr-star); opacity: 1; }
 .trust-bar__sep {
   width: 3px;
   height: 3px;
@@ -1451,6 +1455,69 @@ a:focus-visible {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, var(--clr-sage-100) 0%, var(--clr-sage-50) 100%);
+}
+
+/* Service Proof — trust factors inline */
+.service-proof {
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border-light);
+}
+.service-proof__inner {
+  max-width: var(--max-width-narrow);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+}
+.service-proof__stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3xl);
+  margin-bottom: var(--space-xl);
+}
+.service-proof__stat {
+  text-align: center;
+}
+.service-proof__number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--clr-accent);
+  line-height: 1.2;
+}
+.service-proof__label {
+  font-size: 0.8125rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.4;
+}
+.service-proof__quote {
+  margin: 0;
+  padding: var(--space-lg) var(--space-xl);
+  border-left: 3px solid var(--clr-accent);
+  background: var(--clr-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.service-proof__quote p {
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--clr-text);
+  line-height: 1.7;
+  margin: 0 0 var(--space-xs);
+}
+.service-proof__quote cite {
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: var(--clr-text-secondary);
+}
+
+@media (max-width: 600px) {
+  .service-proof__stats {
+    gap: var(--space-lg);
+  }
+  .service-proof__number {
+    font-size: 1.375rem;
+  }
+  .service-proof__label {
+    font-size: 0.75rem;
+  }
 }
 
 .service-content {

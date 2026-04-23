@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="sky-after" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7EB8DA"/>
+      <stop offset="100%" stop-color="#B8D8E8"/>
+    </linearGradient>
+    <linearGradient id="lawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B9E50"/>
+      <stop offset="100%" stop-color="#5A8A42"/>
+    </linearGradient>
+    <linearGradient id="path-stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C4B8A0"/>
+      <stop offset="100%" stop-color="#B8AA90"/>
+    </linearGradient>
+    <linearGradient id="fence-new" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B7A5E"/>
+      <stop offset="100%" stop-color="#7A6A50"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky clear -->
+  <rect width="600" height="220" fill="url(#sky-after)"/>
+  <circle cx="480" cy="60" r="30" fill="#F5E6A0" opacity="0.7"/>
+
+  <!-- Clean wooden fence -->
+  <g opacity="0.85">
+    <rect x="0" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="70" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="140" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="210" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="280" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="350" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="420" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="490" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="560" y="140" width="8" height="80" fill="url(#fence-new)" rx="1"/>
+    <rect x="0" y="160" width="568" height="5" fill="#7A6A50" rx="1"/>
+    <rect x="0" y="190" width="568" height="5" fill="#7A6A50" rx="1"/>
+  </g>
+
+  <!-- Green lawn -->
+  <rect y="220" width="600" height="230" fill="url(#lawn)"/>
+
+  <!-- Lawn texture -->
+  <g fill="#7DB060" opacity="0.4">
+    <ellipse cx="100" cy="280" rx="80" ry="30"/>
+    <ellipse cx="480" cy="300" rx="90" ry="35"/>
+    <ellipse cx="300" cy="350" rx="100" ry="30"/>
+  </g>
+
+  <!-- Stone stepping path -->
+  <g fill="url(#path-stone)" opacity="0.85">
+    <ellipse cx="300" cy="245" rx="28" ry="14"/>
+    <ellipse cx="290" cy="285" rx="26" ry="13"/>
+    <ellipse cx="305" cy="325" rx="28" ry="14"/>
+    <ellipse cx="295" cy="365" rx="26" ry="13"/>
+    <ellipse cx="300" cy="405" rx="28" ry="14"/>
+    <ellipse cx="295" cy="440" rx="26" ry="13"/>
+  </g>
+
+  <!-- Flower beds left -->
+  <g>
+    <ellipse cx="80" cy="240" rx="70" ry="20" fill="#4A7A38" opacity="0.6"/>
+    <g fill="#E8A0B0" opacity="0.7">
+      <circle cx="40" cy="232" r="5"/>
+      <circle cx="60" cy="228" r="6"/>
+      <circle cx="80" cy="230" r="5"/>
+      <circle cx="100" cy="233" r="4.5"/>
+      <circle cx="120" cy="230" r="5"/>
+    </g>
+    <g fill="#F0D060" opacity="0.6">
+      <circle cx="50" cy="240" r="4"/>
+      <circle cx="90" cy="238" r="4.5"/>
+      <circle cx="110" cy="242" r="3.5"/>
+    </g>
+  </g>
+
+  <!-- Flower beds right -->
+  <g>
+    <ellipse cx="520" cy="240" rx="70" ry="20" fill="#4A7A38" opacity="0.6"/>
+    <g fill="#B8A0E0" opacity="0.7">
+      <circle cx="480" cy="232" r="5"/>
+      <circle cx="500" cy="228" r="6"/>
+      <circle cx="520" cy="230" r="5"/>
+      <circle cx="540" cy="233" r="4.5"/>
+      <circle cx="560" cy="230" r="5"/>
+    </g>
+    <g fill="#C8E080" opacity="0.6">
+      <circle cx="490" cy="240" r="4"/>
+      <circle cx="530" cy="238" r="4.5"/>
+      <circle cx="550" cy="242" r="3.5"/>
+    </g>
+  </g>
+
+  <!-- Small tree left -->
+  <rect x="155" y="260" width="10" height="40" fill="#7A6A50" rx="3"/>
+  <circle cx="160" cy="245" r="28" fill="#4A8A38" opacity="0.7"/>
+  <circle cx="150" cy="240" r="22" fill="#5A9A48" opacity="0.6"/>
+
+  <!-- Small tree right -->
+  <rect x="425" y="260" width="10" height="40" fill="#7A6A50" rx="3"/>
+  <circle cx="430" cy="245" r="28" fill="#4A8A38" opacity="0.7"/>
+  <circle cx="440" cy="240" r="22" fill="#5A9A48" opacity="0.6"/>
+
+  <!-- Planted border bottom -->
+  <g fill="#5A8A42" opacity="0.5">
+    <ellipse cx="100" cy="420" rx="60" ry="15"/>
+    <ellipse cx="500" cy="420" rx="60" ry="15"/>
+  </g>
+  <g fill="#E0A0B8" opacity="0.5">
+    <circle cx="80" cy="412" r="4"/>
+    <circle cx="110" cy="415" r="3.5"/>
+    <circle cx="490" cy="413" r="4"/>
+    <circle cx="520" cy="416" r="3.5"/>
+  </g>
+</svg>

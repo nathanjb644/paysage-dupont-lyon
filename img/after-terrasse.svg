@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="sky-blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7EB8DA"/>
+      <stop offset="100%" stop-color="#B8D8E8"/>
+    </linearGradient>
+    <linearGradient id="wall-clean" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8E2D8"/>
+      <stop offset="100%" stop-color="#D9D1C5"/>
+    </linearGradient>
+    <linearGradient id="wood-deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9E7B5A"/>
+      <stop offset="100%" stop-color="#8B6A4C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="600" height="80" fill="url(#sky-blue)"/>
+  <circle cx="500" cy="45" r="25" fill="#F5E6A0" opacity="0.7"/>
+
+  <!-- Clean wall -->
+  <rect y="80" width="600" height="120" fill="url(#wall-clean)"/>
+
+  <!-- Clean window -->
+  <rect x="230" y="90" width="140" height="100" rx="3" fill="#A3C4D8" opacity="0.6" stroke="#B8A88A" stroke-width="2.5"/>
+  <line x1="300" y1="90" x2="300" y2="190" stroke="#B8A88A" stroke-width="2"/>
+  <line x1="230" y1="140" x2="370" y2="140" stroke="#B8A88A" stroke-width="2"/>
+
+  <!-- Climbing plants on wall -->
+  <g fill="#6B9E50" opacity="0.35">
+    <ellipse cx="80" cy="150" rx="50" ry="35"/>
+    <ellipse cx="520" cy="145" rx="55" ry="38"/>
+  </g>
+
+  <!-- Wood deck -->
+  <rect y="200" width="600" height="250" fill="url(#wood-deck)"/>
+
+  <!-- Deck planks -->
+  <g stroke="#7A5F3F" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="215" x2="600" y2="215"/>
+    <line x1="0" y1="230" x2="600" y2="230"/>
+    <line x1="0" y1="245" x2="600" y2="245"/>
+    <line x1="0" y1="260" x2="600" y2="260"/>
+    <line x1="0" y1="275" x2="600" y2="275"/>
+    <line x1="0" y1="290" x2="600" y2="290"/>
+    <line x1="0" y1="305" x2="600" y2="305"/>
+    <line x1="0" y1="320" x2="600" y2="320"/>
+    <line x1="0" y1="335" x2="600" y2="335"/>
+    <line x1="0" y1="350" x2="600" y2="350"/>
+    <line x1="0" y1="365" x2="600" y2="365"/>
+    <line x1="0" y1="380" x2="600" y2="380"/>
+    <line x1="0" y1="395" x2="600" y2="395"/>
+    <line x1="0" y1="410" x2="600" y2="410"/>
+    <line x1="0" y1="425" x2="600" y2="425"/>
+    <line x1="0" y1="440" x2="600" y2="440"/>
+  </g>
+
+  <!-- Planter box left -->
+  <rect x="20" y="205" width="130" height="100" rx="4" fill="#5A6B48" opacity="0.7"/>
+  <rect x="25" y="210" width="120" height="90" rx="3" fill="#4A5A38"/>
+  <g fill="#6B9E50" opacity="0.8">
+    <circle cx="45" cy="240" r="10"/>
+    <circle cx="65" cy="230" r="12"/>
+    <circle cx="85" cy="235" r="11"/>
+    <circle cx="105" cy="242" r="9"/>
+    <circle cx="125" cy="238" r="8"/>
+    <circle cx="75" cy="255" r="9"/>
+    <circle cx="55" cy="260" r="8"/>
+    <circle cx="95" cy="258" r="10"/>
+  </g>
+  <g fill="#E8A0B0" opacity="0.6">
+    <circle cx="50" cy="228" r="4"/>
+    <circle cx="80" cy="225" r="4.5"/>
+    <circle cx="110" cy="232" r="3.5"/>
+  </g>
+  <g fill="#F0D060" opacity="0.5">
+    <circle cx="65" cy="248" r="3.5"/>
+    <circle cx="95" cy="250" r="3"/>
+  </g>
+
+  <!-- Planter box right -->
+  <rect x="450" y="205" width="130" height="100" rx="4" fill="#5A6B48" opacity="0.7"/>
+  <rect x="455" y="210" width="120" height="90" rx="3" fill="#4A5A38"/>
+  <g fill="#6B9E50" opacity="0.8">
+    <circle cx="475" cy="240" r="10"/>
+    <circle cx="495" cy="230" r="12"/>
+    <circle cx="515" cy="235" r="11"/>
+    <circle cx="535" cy="242" r="9"/>
+    <circle cx="555" cy="238" r="8"/>
+    <circle cx="505" cy="258" r="9"/>
+    <circle cx="485" cy="260" r="8"/>
+    <circle cx="525" cy="255" r="10"/>
+  </g>
+  <g fill="#C8E080" opacity="0.5">
+    <circle cx="480" cy="230" r="4"/>
+    <circle cx="510" cy="248" r="4"/>
+    <circle cx="540" cy="235" r="3.5"/>
+  </g>
+
+  <!-- Outdoor seating area -->
+  <rect x="220" y="320" width="160" height="80" rx="6" fill="#C4B8A8" opacity="0.7"/>
+  <rect x="230" y="330" width="140" height="60" rx="4" fill="#D5CEC2"/>
+  <rect x="248" y="345" width="48" height="28" rx="2" fill="#A09080" opacity="0.4"/>
+  <rect x="308" y="345" width="48" height="28" rx="2" fill="#A09080" opacity="0.4"/>
+
+  <!-- Side planters near seating -->
+  <rect x="170" y="350" width="40" height="50" rx="5" fill="#5A6B48" opacity="0.5"/>
+  <g fill="#6B9E50" opacity="0.7">
+    <circle cx="185" cy="362" r="8"/>
+    <circle cx="198" cy="358" r="7"/>
+  </g>
+  <rect x="390" y="350" width="40" height="50" rx="5" fill="#5A6B48" opacity="0.5"/>
+  <g fill="#6B9E50" opacity="0.7">
+    <circle cx="405" cy="365" r="8"/>
+    <circle cx="418" cy="360" r="7"/>
+  </g>
+
+  <!-- String lights suggestion -->
+  <g stroke="#F5E6A0" stroke-width="0.8" fill="none" opacity="0.3">
+    <path d="M80 85 Q200 110 300 95 Q400 80 520 100"/>
+  </g>
+  <g fill="#F5E6A0" opacity="0.4">
+    <circle cx="140" cy="98" r="2.5"/>
+    <circle cx="220" cy="102" r="2.5"/>
+    <circle cx="300" cy="95" r="2.5"/>
+    <circle cx="380" cy="88" r="2.5"/>
+    <circle cx="460" cy="95" r="2.5"/>
+  </g>
+</svg>

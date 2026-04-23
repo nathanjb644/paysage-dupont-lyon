@@ -143,8 +143,36 @@
 
       // CNIL consent journal — log to Netlify hidden form
       logConsentToServer(value, now);
+
+      // Load analytics if consent granted
+      if (value.analytics) {
+        loadClarity();
+      }
     } catch (e) { /* Silently fail */ }
   }
+
+  // ============================================
+  // MICROSOFT CLARITY — Conditionné au consentement analytics
+  // Remplacer XXXXXXXXXX par l'ID Clarity du projet
+  // ============================================
+  var clarityLoaded = false;
+  function loadClarity() {
+    if (clarityLoaded) return;
+    clarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/XXXXXXXXXX";
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script");
+  }
+
+  // Auto-load Clarity si consentement déjà accordé (retour visiteur)
+  try {
+    var existingConsent = JSON.parse(localStorage.getItem('cookie_consent'));
+    if (existingConsent && existingConsent.analytics) {
+      loadClarity();
+    }
+  } catch (e) { /* No prior consent */ }
 
   // Send consent record to Netlify form for CNIL audit trail
   function logConsentToServer(consent, timestamp) {
