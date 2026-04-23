@@ -1,0 +1,6 @@
+# Photos originales (10+ Mo chacune) — ne pas deployer
+img/originals/
+
+# OS
+.DS_Store
+Thumbs.db

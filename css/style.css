@@ -788,10 +788,27 @@ a:focus-visible {
 .projet-card__after {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
 }
-.projet-card__before { background-color: #d4c8b8; z-index: 1; filter: sepia(0.3) saturate(0.5) brightness(0.85); }
+.projet-card__before picture,
+.projet-card__after picture,
+.projet-card__before > img,
+.projet-card__after > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.projet-card__before picture img,
+.projet-card__after picture img,
+.projet-card__before > img,
+.projet-card__after > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.projet-card__before { background-color: #d4c8b8; z-index: 1; }
+.projet-card__before picture img,
+.projet-card__before > img { filter: sepia(0.3) saturate(0.5) brightness(0.85); }
 .projet-card__after { background-color: var(--clr-sage-100); z-index: 0; }
 .projet-card__before {
   clip-path: inset(0 50% 0 0);
