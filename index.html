@@ -40,7 +40,7 @@
     "@context": "https://schema.org",
     "@type": "LandscapingBusiness",
     "name": "Paysage Dupont Lyon",
-    "image": "https://paysage-dupont-lyon.fr/img/hero-jardin.webp",
+    "image": "https://paysage-dupont-lyon.fr/img/hero-accueil-1200w.webp",
     "telephone": "+33 4 78 12 34 56",
     "email": "contact@paysage-dupont-lyon.fr",
     "address": {
@@ -371,7 +371,11 @@
           </div>
         </div>
         <div class="hero__visual">
-          <div class="hero__img-placeholder" style="background: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&h=600&fit=crop&q=80') center/cover no-repeat;" role="img" aria-label="Jardin aménagé par Paysage Dupont à Lyon">
+          <div class="hero__img-wrapper">
+            <picture>
+              <source type="image/webp" srcset="img/hero-accueil-400w.webp 400w, img/hero-accueil-800w.webp 800w, img/hero-accueil-1200w.webp 1200w, img/hero-accueil-1600w.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw">
+              <img src="img/hero-accueil-800w.jpg" alt="Jardin paysagé avec allée en pas japonais, haies taillées et gazon soigné — réalisation Paysage Dupont Lyon" width="1200" height="675" fetchpriority="high">
+            </picture>
             <div class="hero__img-overlay">
               <span class="hero__img-badge">Réalisation Ecully, 2026</span>
             </div>
