@@ -780,7 +780,7 @@ a:focus-visible {
 .realisations { background: var(--clr-bg); }
 .realisations__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-xl);
   margin-top: var(--space-3xl);
 }
