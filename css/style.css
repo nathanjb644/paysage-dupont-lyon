@@ -735,12 +735,18 @@ a:focus-visible {
   height: 200px;
   overflow: hidden;
 }
-.service-card__img-inner {
+.service-card__img picture,
+.service-card__img picture img,
+.service-card__img > img {
+  display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.6s var(--ease-premium);
 }
-.service-card:hover .service-card__img-inner {
+.service-card:hover .service-card__img picture img,
+.service-card:hover .service-card__img > img {
   transform: scale(1.04);
 }
 .service-card__title {
@@ -790,6 +796,19 @@ a:focus-visible {
   overflow: hidden;
   cursor: ew-resize;
   touch-action: pan-y;
+}
+.projet-card__showcase {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.projet-card__showcase picture,
+.projet-card__showcase picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .projet-card__before,
 .projet-card__after {
