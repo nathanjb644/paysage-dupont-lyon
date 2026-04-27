@@ -256,6 +256,10 @@
     } catch (e) { return false; } // Parse error = assume still valid
   }
 
+  // --- Init: modal ALWAYS hidden on page load ---
+  // CSS display:flex overrides HTML [hidden] — force hide via JS as belt-and-suspenders
+  hideModal();
+
   // --- Init: banner hidden by default (HTML hidden attr) ---
   // Show ONLY if no consent found across ALL storage layers.
   // Priority: if consent exists, HIDE banner. Only show on genuine first visit or explicit expiry.
