@@ -244,6 +244,11 @@
     ]
   }
   </script>
+  <!-- Anti-flash cookie banner: cache le banner si consent déjà donné, avant le rendu -->
+  <script>
+  try{var c=localStorage.getItem('cookie_consent');if(c&&c!=='null'){var d=localStorage.getItem('cookie_consent_date');if(d&&(Date.now()-new Date(d).getTime()<13*30*24*60*60*1000)){document.documentElement.classList.add('cookie-consented')}}}catch(e){}
+  </script>
+  <style>.cookie-consented #cookie-banner{display:none!important}</style>
 </head>
 <body>
 
@@ -403,7 +408,7 @@
             <div class="service-card__img">
               <picture>
                 <source type="image/webp" srcset="img/service-creation-jardin-400w.webp 400w, img/service-creation-jardin-800w.webp 800w, img/service-creation-jardin-1200w.webp 1200w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 300px">
-                <img src="img/service-creation-jardin-800w.jpg" alt="Jardin paysager contemporain avec cactées, graminées et rocaille décorative" width="800" height="500" loading="lazy">
+                <img src="img/service-creation-jardin-800w.jpg" alt="Jardin fleuri avec allée en pierre, massifs colorés, gazon et banc en bois" width="800" height="534" loading="lazy">
               </picture>
             </div>
             <h3 class="service-card__title">Création de jardin</h3>
@@ -431,7 +436,7 @@
             <div class="service-card__img">
               <picture>
                 <source type="image/webp" srcset="img/service-entretien-400w.webp 400w, img/service-entretien-800w.webp 800w, img/service-entretien-1200w.webp 1200w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 300px">
-                <img src="img/service-entretien-800w.jpg" alt="Jardinier professionnel taillant une haie avec un taille-haie" width="800" height="500" loading="lazy">
+                <img src="img/service-entretien-800w.jpg" alt="Paysagiste professionnel taillant un conifère au taille-haie télescopique" width="800" height="534" loading="lazy">
               </picture>
             </div>
             <h3 class="service-card__title">Entretien régulier</h3>

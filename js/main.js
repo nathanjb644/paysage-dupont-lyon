@@ -394,14 +394,20 @@
   // Prevents cookie banner flash on homepage
   // ============================================
   var logoLink = document.querySelector('.header__logo');
-  if (logoLink && (logoLink.getAttribute('href') === '/' || logoLink.getAttribute('href') === '/index.html')) {
-    logoLink.addEventListener('click', function (e) {
-      // Only intercept if we're already on the homepage
-      if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/template-paysagiste/')) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    });
+  if (logoLink) {
+    var logoHref = logoLink.getAttribute('href') || '';
+    // Intercept logo click if already on homepage — smooth scroll instead of reload
+    var isHomepageLink = logoHref === '/' || logoHref === '/index.html' || logoHref === 'index.html' || logoHref === '../index.html';
+    if (isHomepageLink) {
+      logoLink.addEventListener('click', function (e) {
+        var path = window.location.pathname;
+        var isOnHomepage = path === '/' || path.endsWith('/index.html') || path.endsWith('/template-paysagiste/');
+        if (isOnHomepage) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
   }
 
   // ============================================

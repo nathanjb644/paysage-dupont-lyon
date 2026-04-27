@@ -732,7 +732,7 @@ a:focus-visible {
   box-shadow: var(--shadow-lg);
 }
 .service-card__img {
-  height: 200px;
+  height: 160px;
   overflow: hidden;
 }
 .service-card__img picture,
