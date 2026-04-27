@@ -1734,6 +1734,7 @@ a:focus-visible {
 }
 
 /* --- Cookie Modal --- */
+.cookie-modal[hidden] { display: none !important; }
 .cookie-modal {
   position: fixed;
   inset: 0;
