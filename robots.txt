@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /pages/merci.html
 
+# Bloquer les pages utilitaires
+Disallow: /pages/merci.html
+Disallow: /pages/mentions-legales.html
+Disallow: /pages/politique-confidentialite.html
+
+# Sitemap
 Sitemap: https://paysage-dupont-lyon.fr/sitemap.xml

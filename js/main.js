@@ -140,15 +140,19 @@
       var now = new Date().toISOString();
       localStorage.setItem('cookie_consent', JSON.stringify(value));
       localStorage.setItem('cookie_consent_date', now);
-
-      // CNIL consent journal — log to Netlify hidden form
-      logConsentToServer(value, now);
-
-      // Load analytics if consent granted
-      if (value.analytics) {
-        loadClarity();
-      }
-    } catch (e) { /* Silently fail */ }
+    } catch (e) { /* localStorage unavailable */ }
+    try {
+      // Backup: set a native cookie so the head inline script can detect consent
+      // even if localStorage fails (file:// protocol, Safari private browsing)
+      var expires = new Date(Date.now() + 13 * 30 * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = 'cc_set=1;expires=' + expires + ';path=/;SameSite=Lax';
+    } catch (e) { /* cookie also unavailable */ }
+    // Mark page so banner stays hidden for the rest of this session
+    document.documentElement.classList.add('cc-ok');
+    // CNIL consent journal
+    logConsentToServer(value, new Date().toISOString());
+    // Load analytics if consent granted
+    if (value.analytics) { loadClarity(); }
   }
 
   // ============================================
@@ -208,8 +212,8 @@
     }
   }
 
-  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } document.documentElement.classList.add('cookie-consented'); }
-  function showBanner() { if (cookieBanner && !document.documentElement.classList.contains('cookie-consented')) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
+  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } document.documentElement.classList.add('cc-ok'); }
+  function showBanner() { if (cookieBanner) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
   function hideModal() { if (cookieModal) { cookieModal.hidden = true; cookieModal.style.display = 'none'; } }
   function showModal() { if (cookieModal) { cookieModal.hidden = false; cookieModal.style.display = ''; } }
 
@@ -222,13 +226,34 @@
     } catch (e) { return false; }
   }
 
-  // Init
-  var consent = getCookieConsent();
-  if (consent && isConsentValid()) {
-    hideBanner();
-    if (consent.analytics) { /* loadAnalytics(); */ }
+  // Detect if localStorage actually works (file:// protocol can fail silently)
+  function isStorageAvailable() {
+    try {
+      localStorage.setItem('__test__', '1');
+      localStorage.removeItem('__test__');
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Init — banner is hidden by default (HTML hidden attribute).
+  // Only show it if we can CONFIRM storage works AND there's no valid consent.
+  // If storage is broken (file:// protocol), banner stays hidden — no point
+  // asking for consent we can't save.
+  if (isStorageAvailable()) {
+    var consent = getCookieConsent();
+    if (consent && isConsentValid()) {
+      hideBanner();
+      if (consent.analytics) { loadClarity(); }
+    } else if (!consent) {
+      // No consent at all — first visit, show banner
+      showBanner();
+    } else {
+      // Consent exists but expired (>13 months) — re-ask
+      showBanner();
+    }
   } else {
-    showBanner();
+    // localStorage unavailable — keep banner hidden, skip consent
+    hideBanner();
   }
 
   if (cookieAccept) {
