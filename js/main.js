@@ -124,33 +124,55 @@
   var cookieModal = document.getElementById('cookie-modal');
   var footerCookieBtn = document.getElementById('footer-cookie-btn');
 
+  // --- Consent Storage: triple-layer persistence ---
+  // 1. localStorage  (survives sessions, same-origin only)
+  // 2. sessionStorage (survives same-tab navigation, works in file://)
+  // 3. native cookie  (survives cross-origin file:// on some browsers)
   function getCookieConsent() {
+    var raw = null;
+    var date = null;
+    // Try localStorage first
     try {
-      var raw = localStorage.getItem('cookie_consent');
-      if (!raw) return null;
-      // Backward compat: old V1 stored plain strings like "accepted"/"refused"
-      if (raw === 'accepted') return { essential: true, analytics: true, marketing: false };
-      if (raw === 'refused') return { essential: true, analytics: false, marketing: false };
-      return JSON.parse(raw);
-    } catch (e) { return null; }
+      raw = localStorage.getItem('cookie_consent');
+      date = localStorage.getItem('cookie_consent_date');
+    } catch (e) {}
+    // Fallback: sessionStorage (critical for file:// protocol)
+    if (!raw) {
+      try {
+        raw = sessionStorage.getItem('cookie_consent');
+        date = sessionStorage.getItem('cookie_consent_date');
+      } catch (e) {}
+    }
+    if (!raw) return null;
+    // Backward compat: old V1 stored plain strings
+    if (raw === 'accepted') return { essential: true, analytics: true, marketing: false };
+    if (raw === 'refused') return { essential: true, analytics: false, marketing: false };
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+
+  function getConsentDate() {
+    var date = null;
+    try { date = localStorage.getItem('cookie_consent_date'); } catch (e) {}
+    if (!date) { try { date = sessionStorage.getItem('cookie_consent_date'); } catch (e) {} }
+    return date;
   }
 
   function setCookieConsent(value) {
+    var now = new Date().toISOString();
+    var json = JSON.stringify(value);
+    // Layer 1: localStorage
+    try { localStorage.setItem('cookie_consent', json); localStorage.setItem('cookie_consent_date', now); } catch (e) {}
+    // Layer 2: sessionStorage (file:// resilience)
+    try { sessionStorage.setItem('cookie_consent', json); sessionStorage.setItem('cookie_consent_date', now); } catch (e) {}
+    // Layer 3: native cookie (cross-path fallback)
     try {
-      var now = new Date().toISOString();
-      localStorage.setItem('cookie_consent', JSON.stringify(value));
-      localStorage.setItem('cookie_consent_date', now);
-    } catch (e) { /* localStorage unavailable */ }
-    try {
-      // Backup: set a native cookie so the head inline script can detect consent
-      // even if localStorage fails (file:// protocol, Safari private browsing)
       var expires = new Date(Date.now() + 13 * 30 * 24 * 60 * 60 * 1000).toUTCString();
       document.cookie = 'cc_set=1;expires=' + expires + ';path=/;SameSite=Lax';
-    } catch (e) { /* cookie also unavailable */ }
-    // Mark page so banner stays hidden for the rest of this session
+    } catch (e) {}
+    // Mark DOM — immediate visual guard
     document.documentElement.classList.add('cc-ok');
     // CNIL consent journal
-    logConsentToServer(value, new Date().toISOString());
+    logConsentToServer(value, now);
     // Load analytics if consent granted
     if (value.analytics) { loadClarity(); }
   }
@@ -212,48 +234,41 @@
     }
   }
 
-  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } document.documentElement.classList.add('cc-ok'); }
-  function showBanner() { if (cookieBanner) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
+  function hideBanner() {
+    if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; }
+    document.documentElement.classList.add('cc-ok');
+  }
+  function showBanner() {
+    // GUARD: never show if cc-ok class is present (set by inline head script or hideBanner)
+    if (document.documentElement.classList.contains('cc-ok')) return;
+    // GUARD: double-check native cookie as last resort
+    if (document.cookie.indexOf('cc_set=1') !== -1) { hideBanner(); return; }
+    if (cookieBanner) { cookieBanner.hidden = false; cookieBanner.style.display = ''; }
+  }
   function hideModal() { if (cookieModal) { cookieModal.hidden = true; cookieModal.style.display = 'none'; } }
   function showModal() { if (cookieModal) { cookieModal.hidden = false; cookieModal.style.display = ''; } }
 
   function isConsentValid() {
+    var date = getConsentDate();
+    if (!date) return false;
     try {
-      var date = localStorage.getItem('cookie_consent_date');
-      if (!date) return false;
-      var diff = Date.now() - new Date(date).getTime();
-      return diff < 13 * 30 * 24 * 60 * 60 * 1000; // 13 mois CNIL
+      return (Date.now() - new Date(date).getTime()) < 13 * 30 * 24 * 60 * 60 * 1000; // 13 mois CNIL
     } catch (e) { return false; }
   }
 
-  // Detect if localStorage actually works (file:// protocol can fail silently)
-  function isStorageAvailable() {
-    try {
-      localStorage.setItem('__test__', '1');
-      localStorage.removeItem('__test__');
-      return true;
-    } catch (e) { return false; }
-  }
-
-  // Init — banner is hidden by default (HTML hidden attribute).
-  // Only show it if we can CONFIRM storage works AND there's no valid consent.
-  // If storage is broken (file:// protocol), banner stays hidden — no point
-  // asking for consent we can't save.
-  if (isStorageAvailable()) {
-    var consent = getCookieConsent();
-    if (consent && isConsentValid()) {
-      hideBanner();
-      if (consent.analytics) { loadClarity(); }
-    } else if (!consent) {
-      // No consent at all — first visit, show banner
-      showBanner();
-    } else {
-      // Consent exists but expired (>13 months) — re-ask
-      showBanner();
-    }
-  } else {
-    // localStorage unavailable — keep banner hidden, skip consent
+  // --- Init: banner hidden by default (HTML hidden attr) ---
+  // Show ONLY if no valid consent found across ALL storage layers.
+  var consent = getCookieConsent();
+  if (consent && isConsentValid()) {
     hideBanner();
+    if (consent.analytics) { loadClarity(); }
+  } else if (document.cookie.indexOf('cc_set=1') !== -1) {
+    // Storage lost but cookie proves consent was given — stay hidden
+    hideBanner();
+  } else if (!consent) {
+    showBanner(); // Genuine first visit
+  } else {
+    showBanner(); // Consent expired
   }
 
   if (cookieAccept) {

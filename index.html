@@ -3,20 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paysage Dupont Lyon — Aménagement de Jardin & Paysagiste</title>
-  <meta name="description" content="Paysagiste à Lyon. Création de jardins, terrasses et entretien. Devis gratuit sous 2h. 47 jardins réalisés depuis 2019. Note 4.8/5 Google.">
+  <title>Paysagiste Lyon — Paysage Dupont | Création Jardin, Terrasse & Entretien</title>
+  <meta name="description" content="Paysagiste à Lyon et alentours. Création de jardins, aménagement de terrasses, entretien régulier. Devis gratuit sous 2h, visite offerte. 47 jardins réalisés depuis 2019, noté 4.8/5 sur Google. Garantie décennale.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://paysage-dupont-lyon.fr/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Paysage Dupont Lyon — Paysagiste Création & Aménagement">
-  <meta property="og:description" content="Paysagiste à Lyon. Devis gratuit, rappel sous 2h. 47 jardins réalisés, 4.8/5 Google.">
+  <meta property="og:title" content="Paysagiste Lyon — Paysage Dupont | Jardin, Terrasse & Entretien">
+  <meta property="og:description" content="Paysagiste à Lyon. Devis gratuit sous 2h, visite offerte. 47 jardins réalisés, noté 4.8/5 Google. Garantie décennale.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:url" content="https://paysage-dupont-lyon.fr/">
-  <meta property="og:image" content="https://paysage-dupont-lyon.fr/img/og-image.webp">
+  <meta property="og:image" content="https://paysage-dupont-lyon.fr/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Paysage Dupont Lyon">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paysagiste Lyon — Paysage Dupont | Jardin & Terrasse">
+  <meta name="twitter:description" content="Création de jardins, terrasses et entretien à Lyon. Devis gratuit sous 2h. 47 réalisations, 4.8/5 Google.">
+  <meta name="twitter:image" content="https://paysage-dupont-lyon.fr/img/og-image.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
@@ -249,9 +256,9 @@
     ]
   }
   </script>
-  <!-- Anti-flash: cache le banner si consent existe (localStorage OU cookie natif) -->
+  <!-- Anti-flash: cache le banner si consent existe (localStorage → sessionStorage → cookie) -->
   <script>
-  try{var h=false;try{var c=localStorage.getItem('cookie_consent');if(c&&c!=='null'){var d=localStorage.getItem('cookie_consent_date');if(d&&(Date.now()-new Date(d).getTime()<13*30*24*60*60*1000)){h=true}}}catch(e){}if(!h){h=document.cookie.indexOf('cc_set=1')!==-1}if(h){document.documentElement.classList.add('cc-ok')}}catch(e){}
+  try{var h=false;try{var c=localStorage.getItem('cookie_consent');var d=localStorage.getItem('cookie_consent_date');if(c&&c!=='null'&&d&&(Date.now()-new Date(d).getTime()<13*30*24*60*60*1000))h=true}catch(e){}if(!h){try{var s=sessionStorage.getItem('cookie_consent');if(s&&s!=='null')h=true}catch(e){}}if(!h&&document.cookie.indexOf('cc_set=1')!==-1)h=true;if(h)document.documentElement.classList.add('cc-ok')}catch(e){}
   </script>
   <style>.cc-ok #cookie-banner{display:none!important}</style>
 </head>
