@@ -153,15 +153,18 @@
 
   // ============================================
   // MICROSOFT CLARITY — Conditionné au consentement analytics
-  // Remplacer XXXXXXXXXX par l'ID Clarity du projet
+  // ⚠️ IMPORTANT : Remplacer YOUR_CLARITY_ID par l'ID de votre projet Clarity
+  // Créer un projet gratuit sur https://clarity.microsoft.com
+  // L'ID ressemble à "qwerty123" — visible dans Settings > Overview
   // ============================================
+  var CLARITY_PROJECT_ID = 'YOUR_CLARITY_ID';
   var clarityLoaded = false;
   function loadClarity() {
-    if (clarityLoaded) return;
+    if (clarityLoaded || CLARITY_PROJECT_ID === 'YOUR_CLARITY_ID') return;
     clarityLoaded = true;
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/XXXXXXXXXX";
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/" + CLARITY_PROJECT_ID;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window,document,"clarity","script");
   }
@@ -205,8 +208,8 @@
     }
   }
 
-  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } }
-  function showBanner() { if (cookieBanner) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
+  function hideBanner() { if (cookieBanner) { cookieBanner.hidden = true; cookieBanner.style.display = 'none'; } document.documentElement.classList.add('cookie-consented'); }
+  function showBanner() { if (cookieBanner && !document.documentElement.classList.contains('cookie-consented')) { cookieBanner.hidden = false; cookieBanner.style.display = ''; } }
   function hideModal() { if (cookieModal) { cookieModal.hidden = true; cookieModal.style.display = 'none'; } }
   function showModal() { if (cookieModal) { cookieModal.hidden = false; cookieModal.style.display = ''; } }
 
