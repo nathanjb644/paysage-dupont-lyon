@@ -248,27 +248,26 @@
   function hideModal() { if (cookieModal) { cookieModal.hidden = true; cookieModal.style.display = 'none'; } }
   function showModal() { if (cookieModal) { cookieModal.hidden = false; cookieModal.style.display = ''; } }
 
-  function isConsentValid() {
+  function isConsentExpired() {
     var date = getConsentDate();
-    if (!date) return false;
+    if (!date) return false; // No date = assume still valid (don't punish user for missing date)
     try {
-      return (Date.now() - new Date(date).getTime()) < 13 * 30 * 24 * 60 * 60 * 1000; // 13 mois CNIL
-    } catch (e) { return false; }
+      return (Date.now() - new Date(date).getTime()) > 13 * 30 * 24 * 60 * 60 * 1000; // 13 mois CNIL
+    } catch (e) { return false; } // Parse error = assume still valid
   }
 
   // --- Init: banner hidden by default (HTML hidden attr) ---
-  // Show ONLY if no valid consent found across ALL storage layers.
+  // Show ONLY if no consent found across ALL storage layers.
+  // Priority: if consent exists, HIDE banner. Only show on genuine first visit or explicit expiry.
   var consent = getCookieConsent();
-  if (consent && isConsentValid()) {
+  if (consent && !isConsentExpired()) {
     hideBanner();
     if (consent.analytics) { loadClarity(); }
   } else if (document.cookie.indexOf('cc_set=1') !== -1) {
     // Storage lost but cookie proves consent was given — stay hidden
     hideBanner();
-  } else if (!consent) {
-    showBanner(); // Genuine first visit
   } else {
-    showBanner(); // Consent expired
+    showBanner(); // Genuine first visit OR consent truly expired
   }
 
   if (cookieAccept) {

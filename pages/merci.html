@@ -141,7 +141,7 @@
   </style>
   <!-- Anti-flash cookie: cache le banner si consent existe -->
   <script>
-  try{var h=false;try{var c=localStorage.getItem('cookie_consent');var d=localStorage.getItem('cookie_consent_date');if(c&&c!=='null'&&d&&(Date.now()-new Date(d).getTime()<13*30*24*60*60*1000))h=true}catch(e){}if(!h){try{var s=sessionStorage.getItem('cookie_consent');if(s&&s!=='null')h=true}catch(e){}}if(!h&&document.cookie.indexOf('cc_set=1')!==-1)h=true;if(h)document.documentElement.classList.add('cc-ok')}catch(e){}
+  try{var h=false;try{if(localStorage.getItem('cookie_consent'))h=true}catch(e){}if(!h){try{if(sessionStorage.getItem('cookie_consent'))h=true}catch(e){}}if(!h){try{if(document.cookie.indexOf('cc_set=1')!==-1)h=true}catch(e){}}if(h)document.documentElement.classList.add('cc-ok')}catch(e){}
   </script>
   <style>.cc-ok #cookie-banner{display:none!important}</style>
 </head>
