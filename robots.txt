@@ -1,10 +1,39 @@
+# robots.txt — Paysage Dupont Lyon
+# Autorise tous les crawlers, y compris les bots IA
+
 User-agent: *
 Allow: /
-
-# Bloquer les pages utilitaires
 Disallow: /pages/merci.html
 Disallow: /pages/mentions-legales.html
 Disallow: /pages/politique-confidentialite.html
+
+# Bots IA — autorisation explicite
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# LLM discovery file
+# Les IA peuvent lire /llms.txt pour comprendre notre activite
 
 # Sitemap
 Sitemap: https://paysage-dupont-lyon.fr/sitemap.xml
