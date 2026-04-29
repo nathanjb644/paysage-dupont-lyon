@@ -515,6 +515,14 @@ a:focus-visible {
   padding: 1.0625rem 2.5rem;
   font-size: 1rem;
 }
+/* Sub-text inside CTA buttons (CRO micro-copy) */
+.btn__sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-normal);
+  opacity: 0.85;
+  margin-top: 2px;
+}
 
 /* --- Section Layout --- */
 .section__inner {
@@ -1277,6 +1285,159 @@ a:focus-visible {
   box-shadow: 0 12px 28px -6px rgba(155,123,78,0.4);
   transform: translateY(-1px);
 }
+/* CTA Final — social proof line */
+.cta-final__proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+}
+.cta-final__proof-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.cta-final__proof-item svg { color: var(--clr-brass); }
+.cta-final__proof-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+}
+
+/* --- Exit Intent Popup (CRO) --- */
+.exit-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.exit-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+.exit-popup__card {
+  background: var(--clr-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3xl) var(--space-2xl);
+  max-width: 460px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.3s var(--ease-out);
+}
+.exit-popup.is-visible .exit-popup__card {
+  transform: translateY(0) scale(1);
+}
+.exit-popup__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-text-muted);
+  padding: var(--space-xs);
+  line-height: 1;
+}
+.exit-popup__close:hover { color: var(--clr-text); }
+.exit-popup__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--clr-accent-soft, rgba(77,107,76,0.08));
+  color: var(--clr-accent);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  padding: 0.375rem 0.875rem;
+  border-radius: 50px;
+  margin-bottom: var(--space-lg);
+}
+.exit-popup__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--clr-text);
+  margin-bottom: var(--space-sm);
+  line-height: 1.25;
+}
+.exit-popup__text {
+  font-size: 0.9375rem;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+.exit-popup__cta {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: var(--clr-accent);
+  color: var(--clr-white);
+  font-weight: var(--font-weight-bold);
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+.exit-popup__cta:hover { background: var(--clr-accent-dark, #3A5C3A); }
+.exit-popup__dismiss {
+  display: block;
+  margin-top: var(--space-md);
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.exit-popup__proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--clr-border-light);
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+}
+.exit-popup__proof svg { color: var(--clr-brass); }
+
+/* --- Form CRO enhancements --- */
+.field__optional {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--clr-text-muted);
+}
+.form__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-xl);
+  margin-top: var(--space-md);
+  justify-content: center;
+}
+.form__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+}
+.form__trust-item svg { color: var(--clr-accent); flex-shrink: 0; }
 
 /* --- Footer --- */
 .footer {
@@ -1353,25 +1514,45 @@ a:focus-visible {
   color: rgba(255,255,255,0.4);
 }
 
-/* --- Mobile sticky call --- */
-.mobile-sticky-call {
+/* --- Mobile sticky bottom bar (CRO) --- */
+.mobile-sticky-bar {
   display: none;
   position: fixed;
-  bottom: var(--space-lg);
-  right: var(--space-lg);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--clr-white);
+  border-top: 1px solid var(--clr-border-light);
+  padding: 0.625rem var(--space-md);
+  z-index: 900;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  gap: var(--space-sm);
+  align-items: center;
+}
+.mobile-sticky-bar__phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.875rem;
+  color: var(--clr-text);
+  white-space: nowrap;
+}
+.mobile-sticky-bar__cta {
+  flex: 1;
+  display: block;
+  text-align: center;
+  padding: 0.75rem 1rem;
   background: var(--clr-accent);
   color: var(--clr-white);
-  padding: 0.875rem 1.25rem;
-  border-radius: 50px;
-  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
   font-size: 0.9375rem;
-  align-items: center;
-  gap: var(--space-sm);
-  box-shadow: var(--shadow-lg);
-  z-index: 900;
-  transition: transform var(--duration-normal) var(--ease-out);
 }
-.mobile-sticky-call:active { transform: scale(0.96); }
+.mobile-sticky-bar__cta:active { opacity: 0.9; }
 
 /* --- Scroll Reveal Animations --- */
 .reveal {
@@ -1894,7 +2075,9 @@ a:focus-visible {
   .city-stats { flex-direction: column; gap: var(--space-md); }
   .service-cta__inner { flex-direction: column; text-align: center; }
 
-  .mobile-sticky-call { display: flex; }
+  .mobile-sticky-bar { display: flex; }
+  /* Add padding to body so sticky bar doesn't overlap content */
+  body { padding-bottom: 70px; }
 
   .cookie-inner { flex-direction: column; text-align: center; }
   .cookie-actions { width: 100%; }

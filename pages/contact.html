@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.min.css?v=3">
+  <link rel="stylesheet" href="../css/style.min.css?v=4">
   <style>
     /* Contact page specific */
     .contact-page { background: var(--clr-surface); }
@@ -209,8 +209,8 @@
           </div>
 
           <div class="field">
-            <label class="field__label" for="surface">Surface approximative</label>
-            <select class="field__select" id="surface" name="surface" required>
+            <label class="field__label" for="surface">Surface approximative <span class="field__optional">(optionnel)</span></label>
+            <select class="field__select" id="surface" name="surface">
               <option value="" disabled selected>Quelle surface à aménager ?</option>
               <option value="moins-50">Moins de 50 m²</option>
               <option value="50-100">50 à 100 m²</option>
@@ -222,8 +222,8 @@
           </div>
 
           <div class="field">
-            <label class="field__label" for="budget">Budget envisagé</label>
-            <select class="field__select" id="budget" name="budget" required>
+            <label class="field__label" for="budget">Budget envisagé <span class="field__optional">(optionnel)</span></label>
+            <select class="field__select" id="budget" name="budget">
               <option value="" disabled selected>Quel investissement avez-vous en tête ?</option>
               <option value="moins-5000">Moins de 5 000 EUR</option>
               <option value="5000-15000">5 000 — 15 000 EUR</option>
@@ -239,10 +239,22 @@
           </div>
 
           <div class="form__submit">
-            <button type="submit" class="btn btn--primary btn--lg">Obtenir mon devis gratuit</button>
+            <button type="submit" class="btn btn--primary btn--lg">
+              Obtenir mon devis gratuit
+              <span class="btn__sub">Rappel sous 2h, aucun engagement</span>
+            </button>
           </div>
 
-          <p class="form__reassurance">Aucun engagement. Rappel sous 2h ouvrées.</p>
+          <div class="form__trust">
+            <span class="form__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Vos données restent confidentielles
+            </span>
+            <span class="form__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.8/5 sur 47 avis Google
+            </span>
+          </div>
         </form>
 
         <div class="contact-info">
@@ -271,6 +283,6 @@
     Appeler
   </a>
 
-  <script src="../js/main.min.js?v=3"></script>
+  <script src="../js/main.min.js?v=4"></script>
 </body>
 </html>

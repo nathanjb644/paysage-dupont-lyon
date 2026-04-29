@@ -509,4 +509,76 @@
     scrollSpyUpdate();
   }
 
+  // ============================================
+  // EXIT INTENT POPUP — Desktop only, 1x par session
+  // Stratégie CRO : capture 3-10% des visiteurs sortants
+  // ============================================
+  var exitPopup = document.getElementById('exit-popup');
+  var exitPopupClose = document.getElementById('exit-popup-close');
+  var exitPopupDismiss = document.getElementById('exit-popup-dismiss');
+
+  if (exitPopup) {
+    var exitShown = false;
+
+    function showExitPopup() {
+      if (exitShown) return;
+      // Don't show if already shown this session
+      if (sessionStorage.getItem('exit_popup_shown')) return;
+      // Don't show on mobile (< 768px)
+      if (window.innerWidth < 768) return;
+      // Don't show if user already scrolled past 90% (they're engaged)
+      exitShown = true;
+      sessionStorage.setItem('exit_popup_shown', '1');
+      exitPopup.classList.add('is-visible');
+      exitPopup.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideExitPopup() {
+      exitPopup.classList.remove('is-visible');
+      exitPopup.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Exit intent: mouse leaves viewport top
+    document.addEventListener('mouseout', function (e) {
+      if (e.clientY <= 0 && !exitShown) {
+        // Delay 5s after page load to avoid false triggers
+        showExitPopup();
+      }
+    });
+
+    // Close handlers
+    if (exitPopupClose) exitPopupClose.addEventListener('click', hideExitPopup);
+    if (exitPopupDismiss) exitPopupDismiss.addEventListener('click', hideExitPopup);
+    // Click outside closes
+    exitPopup.addEventListener('click', function (e) {
+      if (e.target === exitPopup) hideExitPopup();
+    });
+    // Escape key closes
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && exitPopup.classList.contains('is-visible')) hideExitPopup();
+    });
+  }
+
+  // ============================================
+  // MOBILE STICKY BAR — Show after scrolling past hero
+  // ============================================
+  var stickyBar = document.getElementById('mobile-sticky-bar');
+  if (stickyBar) {
+    var heroSection = document.querySelector('.hero');
+    if (heroSection && window.innerWidth < 768) {
+      var stickyObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            stickyBar.hidden = false;
+          } else {
+            stickyBar.hidden = true;
+          }
+        });
+      }, { threshold: 0 });
+      stickyObserver.observe(heroSection);
+    }
+  }
+
 })();
