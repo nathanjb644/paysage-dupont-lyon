@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer-policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
   <title>Devis Gratuit — Paysage Dupont Lyon</title>
   <meta name="description" content="Demandez votre devis gratuit pour votre projet paysager à Lyon. Rappel garanti sous 2h. Aucun engagement.">
   <meta name="robots" content="index, follow">
@@ -29,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.min.css?v=5">
+  <link rel="stylesheet" href="../css/style.min.css?v=6">
   <style>
     /* Contact page specific */
     .contact-page { background: var(--clr-surface); }
@@ -250,7 +252,7 @@
           <!-- Case RGPD obligatoire -->
           <div class="form__consent">
             <input type="checkbox" id="consent" name="consent" required>
-            <label for="consent">J'accepte que mes données soient traitées pour me recontacter dans le cadre de ma demande de devis, conformément à la <a href="politique-confidentialite.html" target="_blank">politique de confidentialité</a>.</label>
+            <label for="consent">J'accepte que mes données soient traitées pour me recontacter dans le cadre de ma demande de devis, conformément à la <a href="politique-confidentialite.html" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>.</label>
           </div>
 
           <div class="form__submit">
@@ -295,6 +297,6 @@
 
   <!-- On contact page, no sticky bar needed — user is already converting -->
 
-  <script src="../js/main.min.js?v=5"></script>
+  <script src="../js/main.min.js?v=6"></script>
 </body>
 </html>
