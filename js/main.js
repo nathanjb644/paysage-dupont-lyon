@@ -117,6 +117,50 @@
   // COOKIE BANNER + MODAL — CNIL 2026 CONFORME
   // 3 catégories : Essentiel (toujours), Analytique (consent), Marketing (consent)
   // ============================================
+
+  // --- Auto-inject cookie banner + modal on pages that don't have them ---
+  // index.html has them in static HTML; subpages get them via JS injection.
+  // This ensures CNIL compliance on every page, even direct landings from Google.
+  if (!document.getElementById('cookie-banner')) {
+    var bannerHTML =
+      '<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Gestion des cookies" hidden>' +
+        '<div class="cookie-inner">' +
+          '<p class="cookie-text">Ce site utilise des cookies. Les cookies essentiels (fonctionnement du site) sont toujours actifs. Les cookies analytiques (mesure d’audience anonyme) nécessitent votre consentement. Aucun cookie publicitaire n’est utilisé.</p>' +
+          '<div class="cookie-actions">' +
+            '<button id="cookie-refuse" class="cookie-btn cookie-btn--refuse">Tout refuser</button>' +
+            '<button id="cookie-accept" class="cookie-btn cookie-btn--accept">Tout accepter</button>' +
+          '</div>' +
+          '<button id="cookie-params" class="cookie-link">Paramétrer mes choix</button>' +
+        '</div>' +
+      '</div>';
+    var modalHTML =
+      '<div id="cookie-modal" class="cookie-modal" hidden>' +
+        '<div class="cookie-modal__content" role="dialog" aria-label="Paramétrage des cookies">' +
+          '<h3 class="cookie-modal__title">Paramétrer les cookies</h3>' +
+          '<div class="cookie-category">' +
+            '<div class="cookie-category__info">' +
+              '<p class="cookie-category__name">Cookies essentiels</p>' +
+              '<p class="cookie-category__desc">Fonctionnement du site, sécurité. Toujours actifs.</p>' +
+            '</div>' +
+            '<span class="cookie-toggle cookie-toggle--active cookie-toggle--disabled" aria-label="Toujours actif"></span>' +
+          '</div>' +
+          '<div class="cookie-category">' +
+            '<div class="cookie-category__info">' +
+              '<p class="cookie-category__name">Cookies analytiques</p>' +
+              '<p class="cookie-category__desc">Mesure d’audience anonyme pour améliorer le site.</p>' +
+            '</div>' +
+            '<button class="cookie-toggle" data-category="analytics" aria-label="Activer les cookies analytiques"></button>' +
+          '</div>' +
+          '<div class="cookie-modal__actions">' +
+            '<button id="cookie-modal-close" class="cookie-btn cookie-btn--refuse">Annuler</button>' +
+            '<button id="cookie-save" class="cookie-btn cookie-btn--accept">Enregistrer mes choix</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    // Insert after <body> opening (before first child)
+    document.body.insertAdjacentHTML('afterbegin', bannerHTML + modalHTML);
+  }
+
   var cookieBanner = document.getElementById('cookie-banner');
   var cookieAccept = document.getElementById('cookie-accept');
   var cookieRefuse = document.getElementById('cookie-refuse');
